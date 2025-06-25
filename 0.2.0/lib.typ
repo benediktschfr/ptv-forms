@@ -1,3 +1,5 @@
+#import "@local/letter:0.3.0": *
+
 // Custom functions for layouting
 #let pad-text(
   input,
@@ -773,8 +775,6 @@
   )
 }
 
-#import "@local/letter:0.1.0": *
-
 #let ptv(
   therapeut: [],
   anrede: [],
@@ -845,6 +845,7 @@
     vorname: vorname,
     nachname: nachname,
     therapeut: therapeut,
+    arztregister-nr: arztregister-nr,
     praxisadresse: praxisadresse,
     geburtsdatum: geburtsdatum,
     adresse: adresse,
@@ -860,6 +861,7 @@
     vorname: vorname,
     nachname: nachname,
     therapeut: therapeut,
+    arztregister-nr: arztregister-nr,
     praxisadresse: praxisadresse,
     geburtsdatum: geburtsdatum,
     adresse: adresse,
