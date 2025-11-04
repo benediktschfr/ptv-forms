@@ -1,8 +1,8 @@
 # typst Forms for German Psychotherapy (PTV)
 
-[![GitHub License](https://img.shields.io/github/license/benediktclaus/ptv-forms)](LICENSE)
-[![GitHub Release](https://img.shields.io/github/v/release/benediktclaus/ptv-forms)](https://github.com/benediktclaus/ptv-forms/releases)
-[![GitHub last commit](https://img.shields.io/github/last-commit/benediktclaus/ptv-forms)](https://github.com/benediktclaus/ptv-forms/commits/main)
+[![GitHub License](https://img.shields.io/github/license/benediktclaus/ptv-forms?style=flat-square)](LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/benediktclaus/ptv-forms?style=flat-square)](https://github.com/benediktclaus/ptv-forms/releases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/benediktclaus/ptv-forms?style=flat-square)](https://github.com/benediktclaus/ptv-forms/commits/main)
 
 A `typst` package to generate all necessary forms for a psychotherapy application via the German cost reimbursement procedure ("Kostenerstattung").
 
