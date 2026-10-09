@@ -1,0 +1,12 @@
+[package]
+name = "ptv-forms"
+version = "0.4.0"
+entrypoint = "lib.typ"
+authors = ["Benedikt Claus"]
+license = "MIT"
+description = "Forms for German psychotherapy application"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
