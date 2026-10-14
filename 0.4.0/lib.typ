@@ -1,4 +1,4 @@
-#import "@local/letter:0.4.0": *
+#import "@local/letter:0.4.1": *
 
 // Custom functions for layouting
 #let pad-text(
