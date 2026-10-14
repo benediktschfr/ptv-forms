@@ -974,7 +974,7 @@
         #set align(center)
 
         Exemplar für den Gutachter / die Gutachterin \
-        (in Kopie für Therapeut*n / Vertragsärzt*in)
+        (in Kopie für Therapeut*in / Vertragsärzt*in)
       ] else [
         #set align(center)
 
