@@ -110,9 +110,20 @@
 ]
 
 #let format-date(datum) = {
-  let datum-tag = datum.at("text").slice(0, count: 2)
-  let datum-monat = datum.at("text").slice(3, count: 2)
-  let datum-jahr = datum.at("text").slice(8, count: 2)
+  // 1. Sicherstellen, dass wir einen String haben
+  let datum-str = if type(datum) == str {
+    datum
+  } else if type(datum) == content and datum.has("text") {
+    datum.text
+  } else {
+    panic("Erwartet ein Datum als String oder Text-Content")
+  }
+
+  // 2. Deine ursprüngliche Logik, angewandt auf den sicheren String
+  let datum-tag = datum-str.slice(0, count: 2)
+  let datum-monat = datum-str.slice(3, count: 2)
+  let datum-jahr = datum-str.slice(8, count: 2)
+  
   datum-tag + datum-monat + datum-jahr
 }
 
@@ -809,7 +820,7 @@
     #krankenkasse\
     #krankenkasse-adresse
   ]
-  #let anfangsbuchstabe = nachname.at("text").first()
+  #let anfangsbuchstabe = nachname.first()
   #let dob-formatiert = format-date(geburtsdatum)
   #let chiffre = {
     anfangsbuchstabe + dob-formatiert
