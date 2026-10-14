@@ -891,7 +891,7 @@
   #{
     if gutachter [
       #block(
-        height: 100mm,
+        height: 120mm
       )[
         #set text(size: 9pt)
         #set par(justify: true)
@@ -923,7 +923,7 @@
       #block(
         stroke: 0.5pt,
         width: 100%,
-        height: 100mm,
+        height: 120mm,
       )[
         #set align(center + horizon)
         *Aus Datenschutzgründen freibleibend*
