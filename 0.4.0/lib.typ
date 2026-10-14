@@ -775,6 +775,220 @@
   )
 }
 
+#let entry-line(body, therapeut: [Test], length: 30mm) = box(
+  move(
+    dy: 3.8mm,
+    grid(
+      columns: 1,
+      row-gutter: 1mm,
+      align: bottom + right,
+      align(left, text(font: "DejaVu Sans Mono", therapeut)),
+      line(length: length, stroke: 0.5pt),
+      text(size: 8pt, body),
+    ),
+  ),
+)
+
+#let konsiliarbericht(
+  krankenkasse: none,
+  krankenkasse-adresse: none,
+  vorname: none,
+  nachname: none,
+  geburtsdatum: none,
+  adresse: none,
+  vnummer: hide[vnummer],
+  gutachter: true,
+  therapeut: [Test2],
+  body,
+) = [
+  #let angaben-groesse = 7pt
+  #set text(font: "Roboto", size: 10pt)
+  #set page(margin: 1cm)
+  #let line-thickness = 0.3pt
+  #let vbox-content = [
+    #krankenkasse\
+    #krankenkasse-adresse
+  ]
+  #let anfangsbuchstabe = nachname.at("text").first()
+  #let dob-formatiert = format-date(geburtsdatum)
+  #let chiffre = {
+    anfangsbuchstabe + dob-formatiert
+  }
+
+
+  // Document
+  #grid(
+    columns: 2,
+    column-gutter: 0.5cm,
+    if not gutachter {
+      table(
+        columns: 1,
+        stroke: line-thickness,
+        [
+          #text(size: angaben-groesse)[Krankenkasse]\
+          #raw-text(krankenkasse)
+        ],
+
+        [
+          #grid(
+            columns: 2 * (1fr,),
+            [
+              #text(size: angaben-groesse)[Name, Vorname des/der Versicherten]\
+              #raw-text(nachname)\
+              #raw-text(vorname)\
+              #raw-text(adresse)
+            ],
+            [
+              #set align(right + bottom)
+
+              #text(size: angaben-groesse)[geb. am]\
+              #raw-text(geburtsdatum)
+            ],
+          )
+        ],
+
+        [
+          #text(size: angaben-groesse)[Versichertennummer]\
+          #raw-text(vnummer)
+        ],
+      )
+    } else {
+      box(
+        stroke: 0.5pt,
+        width: 100%,
+        height: 40mm,
+      )[
+        #set align(center + horizon)
+        #set par(justify: false)
+        *Aus Datenschutzgründen freibleibend*
+      ]
+    },
+    [
+      #grid(
+        columns: 1,
+        row-gutter: 8mm,
+        text(size: 12pt, weight: "bold")[Konsiliarbericht -- Psychotherapie in der Kostenerstattung],
+        text(size: 9pt, weight: "regular")[vor Aufnahme einer Psychotherapie durch Psychologische
+          Psychotherapeut*innen und Kinder- und Jugendlichenpsycho-
+          therapeut*innen im Rahmen der sog. Kostenerstattung (§ 13
+          Abs. 3 SGB V) ],
+        [
+          *Auf Veranlassung von:* #h(1fr) #entry-line("Name Therapeut*in", therapeut: therapeut, length: 50mm)],
+        [
+          #set align(right)
+          Chiffre Patient*in: #h(2mm) #box(for i in chiffre {
+            box(stroke: (paint: black, thickness: 0.3pt), width: 5mm, height: 16pt)[
+              #set align(center + horizon)
+              #set text(font: "DejaVu Sans Mono", size: 9pt)
+              #i
+            ]
+          })
+        ],
+      )
+    ],
+  )
+
+  #{
+    if gutachter [
+      #block(
+        height: 100mm,
+      )[
+        #set text(size: 9pt)
+        #set par(justify: true)
+        *Es sollen ggf. Angaben zu folgenden Inhalten gemacht werden:*
+
+        Aktuelle Beschwerden, Angaben zum psychischen und somatischen Befund (bei Kindern und Jugendlichen insbesondere unter Berücksichtigung des Entwicklungsstandes), relevante anamnestische Daten im Zusammenhang mit den aktuellen Beschwerden, medizinische Diagnosen, Differenzial- und Verdachtsdiagnosen, relevante Vor- und Parallelbehandlungen stat./amb. (z.B. laufende Medikation), ggf. Befunde, die eine ärztliche/ärztlich veranlasste Begleitbehandlung und/oder psychiatrische bzw. kinder- und jugendpsychiatrische Untersuchung erforderlich machen:
+
+        #v(1fr)
+
+        #grid(
+          columns: 5,
+          column-gutter: 5mm,
+          align: left + bottom,
+          [Psychiatrische bzw. kinder- und jugendpsychiatrische\ Abklärung ist],
+          [#sym.ballot erforderlich],
+          [#sym.ballot nicht erfordelrich],
+          [#sym.ballot erfolgt],
+          [#sym.ballot veranlasst],
+        )
+
+
+        Sind ärztliche/ärztlich veranlasste Maßnahmen bzw. Untersuchungen notwendig bzw. veranlasst und ggf. welche?
+        #v(5mm)
+        #line(length: 100%, stroke: 0.5pt)
+        #v(5mm)
+        #line(length: 100%, stroke: 0.5pt)
+      ]
+    ] else [
+      #block(
+        stroke: 0.5pt,
+        width: 100%,
+        height: 100mm,
+      )[
+        #set align(center + horizon)
+        *Aus Datenschutzgründen freibleibend*
+      ]
+    ]
+  }
+
+  #v(1fr)
+
+  #grid(
+    columns: 2,
+    row-gutter: 5mm,
+    column-gutter: 2mm,
+    sym.ballot,
+    [ Aufgrund somatischer/psychiatrischer Befunde bestehen derzeit Kontra-
+      indikationen für eine psychotherapeutische Behandlung (Begründung s. o.) ],
+
+    sym.ballot, [Ärztliche Mitbehandlung ist erforderlich],
+  )
+
+  Art der Maßnahme:
+  #v(5mm)
+  #line(length: 100%, stroke: 0.5pt)
+  #v(5mm)
+  #line(length: 100%, stroke: 0.5pt)
+
+
+  #grid(
+    columns: (2fr, 1fr, 1fr),
+    align: (left + bottom, left + bottom, right),
+    column-gutter: 5mm,
+    box(
+      stroke: 0.5pt,
+      width: 90%,
+      inset: 3mm,
+      if gutachter [
+        #set align(center)
+
+        Exemplar für den Gutachter / die Gutachterin \
+        (in Kopie für Therapeut*n / Vertragsärzt*in)
+      ] else [
+        #set align(center)
+
+        Exemplar für die Krankenkasse
+      ],
+    ),
+    [
+      Ausstellungsdatum
+      #v(5mm)
+      #line(length: 40mm, stroke: 0.5pt)
+    ],
+    box(
+      height: 3.5cm,
+      width: 5cm,
+      inset: 1mm,
+      stroke: (paint: black, thickness: 0.3pt),
+    )[
+
+
+      #set align(center + bottom)
+      #text(size: 8pt)[Stempel und Unterschrift]
+    ],
+  )
+]
+
 #let ptv(
   therapeut: [],
   anrede: [],
